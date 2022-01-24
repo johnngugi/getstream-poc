@@ -10,7 +10,7 @@ class ChannelPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const ChannelHeader(
-        title: Text('ddddddddddddddd'),
+        title: ChannelName(),
       ),
       body: Column(
         children: <Widget>[

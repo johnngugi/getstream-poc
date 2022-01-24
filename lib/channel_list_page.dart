@@ -1,7 +1,6 @@
 import 'package:awesome_flutter_chat/channel_page.dart';
-import 'package:awesome_flutter_chat/main.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
 class ChannelListPage extends StatelessWidget {
@@ -18,10 +17,10 @@ class ChannelListPage extends StatelessWidget {
         actions: <Widget>[
           IconButton(
             onPressed: () {
-              final client =
-                  Provider.of<AppModel>(context, listen: false).chatClient;
-              final channel = client.channel('messaging', id: 'test');
-              channel.watch();
+              // final client =
+              //     Provider.of<AppModel>(context, listen: false).chatClient;
+              // final channel = client.channel('messaging', id: 'test2');
+              // channel.watch();
             },
             icon: const Icon(Icons.group_add),
           ),
@@ -43,7 +42,7 @@ class ChannelListPage extends StatelessWidget {
   }
 
   Widget _channelPreviewBuilder(BuildContext context, Channel channel) {
-    final lastMessage = channel.state?.messages.reversed.firstWhere(
+    final lastMessage = channel.state?.messages.reversed.firstWhereOrNull(
       (message) => !message.isDeleted,
     );
 
@@ -100,7 +99,7 @@ class TestAppBar extends StatelessWidget implements PreferredSizeWidget {
             title ?? '',
             style: const TextStyle(color: Colors.black),
           ),
-          IconButton(onPressed: () {}, icon: Icon(Icons.add)),
+          IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
         ],
       ),
     );

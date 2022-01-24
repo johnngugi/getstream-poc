@@ -24,14 +24,11 @@ void main() async {
   /// https://getstream.io/chat/docs/flutter-dart/tokens_and_authentication/?language=dart
   await client.connectUser(
     User(id: 'john'),
+    // client.devToken('john').toString(),
     userToken,
   );
 
-  /// Creates a channel using the type `messaging` and `flutterdevs`.
-  /// Channels are containers for holding messages between different members. To
-  /// learn more about channels and some of our predefined types, checkout our
-  /// our channel docs: https://getstream.io/chat/docs/flutter-dart/creating_channels/?language=dart
-  final channel = client.channel('messaging', id: 'flutterdevs');
+  final channel = client.channel('messaging', id: 'test');
 
   /// `.watch()` is used to create and listen to the channel for updates. If the
   /// channel already exists, it will simply listen for new events.
@@ -65,13 +62,11 @@ class _MyAppState extends State<MyApp> {
   late Channel channel;
 
   @override
-  void initState() {
-    super.initState();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
 
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
-      channel = Provider.of<AppModel>(context, listen: false).channel;
-      client = Provider.of<AppModel>(context, listen: false).chatClient;
-    });
+    channel = Provider.of<AppModel>(context, listen: false).channel;
+    client = Provider.of<AppModel>(context, listen: false).chatClient;
   }
 
   @override
