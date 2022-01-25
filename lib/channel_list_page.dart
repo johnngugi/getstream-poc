@@ -1,13 +1,19 @@
+import 'package:awesome_flutter_chat/add_channel.dart';
 import 'package:awesome_flutter_chat/channel_page.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
-class ChannelListPage extends StatelessWidget {
+class ChannelListPage extends StatefulWidget {
   const ChannelListPage({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<ChannelListPage> createState() => _ChannelListPageState();
+}
+
+class _ChannelListPageState extends State<ChannelListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,11 +22,19 @@ class ChannelListPage extends StatelessWidget {
         centerTitle: true,
         actions: <Widget>[
           IconButton(
-            onPressed: () {
+            onPressed: () async {
               // final client =
               //     Provider.of<AppModel>(context, listen: false).chatClient;
               // final channel = client.channel('messaging', id: 'test2');
-              // channel.watch();
+              // await channel.watch();
+
+              // setState(() {});
+
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) {
+                  return const AddChannelPage();
+                },
+              ));
             },
             icon: const Icon(Icons.group_add),
           ),

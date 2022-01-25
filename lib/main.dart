@@ -1,3 +1,4 @@
+import 'package:awesome_flutter_chat/app_model.dart';
 import 'package:awesome_flutter_chat/channel_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_config/flutter_config.dart';
@@ -24,7 +25,6 @@ void main() async {
   /// https://getstream.io/chat/docs/flutter-dart/tokens_and_authentication/?language=dart
   await client.connectUser(
     User(id: 'john'),
-    // client.devToken('john').toString(),
     userToken,
   );
 
@@ -67,6 +67,11 @@ class _MyAppState extends State<MyApp> {
 
     channel = Provider.of<AppModel>(context, listen: false).channel;
     client = Provider.of<AppModel>(context, listen: false).chatClient;
+
+    final user = client.state.currentUser;
+    print('aaaaaaaaaaaaaaaaaaaa');
+    print(user);
+    print(user?.role);
   }
 
   @override
@@ -84,14 +89,4 @@ class _MyAppState extends State<MyApp> {
       ),
     );
   }
-}
-
-class AppModel {
-  final Channel channel;
-  final StreamChatClient chatClient;
-
-  AppModel({
-    required this.channel,
-    required this.chatClient,
-  });
 }
