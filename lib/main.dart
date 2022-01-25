@@ -24,7 +24,7 @@ void main() async {
   /// Please see the following for more information:
   /// https://getstream.io/chat/docs/flutter-dart/tokens_and_authentication/?language=dart
   await client.connectUser(
-    User(id: 'savannah_informatics'),
+    User(id: 'john'),
     userToken,
   );
 

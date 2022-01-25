@@ -19,6 +19,7 @@ class ChannelPage extends StatelessWidget {
               threadBuilder: (_, parentMessage) => ThreadPage(
                 parent: parentMessage,
               ),
+              pinPermissions: const ['admin', 'user', 'owner'],
             ),
           ),
           const MessageInput(),
