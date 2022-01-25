@@ -5,30 +5,24 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
-class AddChannelPage extends StatefulWidget {
+class AddChannelPage extends StatelessWidget {
   const AddChannelPage({Key? key}) : super(key: key);
 
-  @override
-  State<AddChannelPage> createState() => _AddChannelPageState();
-}
-
-class _AddChannelPageState extends State<AddChannelPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('new group'),
+        title: const Text('New Group'),
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: FutureBuilder<List<User>>(
-            future: Provider.of<AppModel>(context).queryUsers(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                final ids =
-                    snapshot.data?.map((user) => user.id).toList() ?? [];
+        child: FutureBuilder<List<User>>(
+          future: Provider.of<AppModel>(context).queryUsers(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              final ids = snapshot.data?.map((user) => user.id).toList() ?? [];
 
-                return Column(
+              return SingleChildScrollView(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     CreateChannelInputWidget(
@@ -55,12 +49,18 @@ class _AddChannelPageState extends State<AddChannelPage> {
                         ],
                       ),
                   ],
-                );
-              } else {
-                return Container();
-              }
-            },
-          ),
+                ),
+              );
+            } else {
+              return const Center(
+                child: SizedBox(
+                  width: 60,
+                  height: 60,
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            }
+          },
         ),
       ),
     );
